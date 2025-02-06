@@ -45,7 +45,7 @@ func createMetricsReceiver(
 		return nil, err
 	}
 
-	scraper, err := scraper.NewMetrics(icmpScraper.Scrape, scraper.WithStart(icmpScraper.Start))
+	scraper, err := scraper.NewMetrics(icmpScraper.Scrape, scraper.WithStart(icmpScraper.ping))
 	if err != nil {
 		return nil, err
 	}
