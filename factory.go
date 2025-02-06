@@ -8,6 +8,7 @@ import (
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/consumer"
 	"go.opentelemetry.io/collector/receiver"
+	"go.opentelemetry.io/collector/scraper"
 	"go.opentelemetry.io/collector/scraper/scraperhelper"
 )
 
@@ -39,19 +40,16 @@ func createMetricsReceiver(
 		return nil, errors.New("config is not a valid icmpping receiver config")
 	}
 
-	opts := []scraperhelper.ScraperControllerOption{}
-
 	icmpScraper, err := newScraper(set.Logger, receiverCfg.Targets)
 	if err != nil {
 		return nil, err
 	}
 
-	scraper, err := scraperhelper.NewScraper(metadata.Type, icmpScraper.Scrape)
+	scraper, err := scraper.NewMetrics(icmpScraper.Scrape, scraper.WithStart(icmpScraper.Start))
 	if err != nil {
 		return nil, err
 	}
 
-	opts = append(opts, scraperhelper.AddScraper(scraper))
+	return scraperhelper.NewMetricsController(&receiverCfg.ControllerConfig, set, nextConsumer, scraperhelper.AddScraper(metadata.Type, scraper))
 
-	return scraperhelper.NewScraperControllerReceiver(&receiverCfg.ControllerConfig, set, nextConsumer, opts...)
 }
