@@ -3,12 +3,12 @@ package icmpcheckreceiver
 import (
 	"time"
 
-	"go.opentelemetry.io/collector/receiver/scraperhelper"
+	"go.opentelemetry.io/collector/receiver/receiverhelper"
 )
 
 type Config struct {
-	scraperhelper.ControllerConfig `mapstructure:",squash"`
-	Targets                        []Target `mapstructure:"targets"`
+	receiverhelper.ControllerConfig `mapstructure:",squash"`
+	Targets                         []Target `mapstructure:"targets"`
 }
 
 type Target struct {

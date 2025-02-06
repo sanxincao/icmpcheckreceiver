@@ -2,56 +2,41 @@ package icmpcheckreceiver
 
 import (
 	"context"
-	"errors"
+	"time"
 
-	"github.com/thmshmm/icmpcheckreceiver/internal/metadata"
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/consumer"
 	"go.opentelemetry.io/collector/receiver"
-	"go.opentelemetry.io/collector/receiver/scraperhelper"
+	"go.opentelemetry.io/collector/receiver/receiverhelper"
 )
 
-func NewFactory() receiver.Factory {
-	return receiver.NewFactory(
-		metadata.Type,
-		createDefaultConfig,
-		receiver.WithMetrics(createMetricsReceiver, metadata.MetricsStability),
-	)
-}
+var (
+	typeStr = component.MustNewType("icmpcheckreceiver")
+)
+
+const (
+	defaultInterval = 1 * time.Minute
+)
 
 func createDefaultConfig() component.Config {
-	cfg := scraperhelper.NewDefaultControllerConfig()
-
 	return &Config{
-		ControllerConfig: cfg,
-		Targets:          []Target{},
+		Interval: defaultInterval,
 	}
 }
 
-func createMetricsReceiver(
-	ctx context.Context,
-	set receiver.Settings,
-	cfg component.Config,
-	nextConsumer consumer.Metrics,
-) (receiver.Metrics, error) {
-	receiverCfg, ok := cfg.(*Config)
-	if !ok {
-		return nil, errors.New("config is not a valid icmpping receiver config")
-	}
+func createMetricsReceiver(_ context.Context, params receiver.Settings, baseCfg component.Config, consumer consumer.Metrics) (receiver.Metrics, error) {
+	logger := params.Logger
+	cfg := baseCfg.(*Config)
 
-	opts := []scraperhelper.ScraperControllerOption{}
+	icmpRcvr := newIcmpCheckReceiver(logger, cfg, consumer)
 
-	icmpScraper, err := newScraper(set.Logger, receiverCfg.Targets)
-	if err != nil {
-		return nil, err
-	}
+	return receiverhelper.NewReceiver(&cfg.ReceiverSettings, params, consumer, receiverhelper.AddScraper(icmpRcvr))
+}
 
-	scraper, err := scraperhelper.NewScraper(metadata.Type, icmpScraper.Scrape)
-	if err != nil {
-		return nil, err
-	}
-
-	opts = append(opts, scraperhelper.AddScraper(scraper))
-
-	return scraperhelper.NewScraperControllerReceiver(&receiverCfg.ControllerConfig, set, nextConsumer, opts...)
+// NewFactory creates a factory for icmpcheckreceiver.
+func NewFactory() receiver.Factory {
+	return receiver.NewFactory(
+		typeStr,
+		createDefaultConfig,
+		receiver.WithMetrics(createMetricsReceiver, component.StabilityLevelAlpha))
 }
