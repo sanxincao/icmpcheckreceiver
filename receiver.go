@@ -8,10 +8,9 @@ import (
 	"time"
 
 	probing "github.com/prometheus-community/pro-bing"
-	"go.opentelemetry.io/collector/component"
-	"go.opentelemetry.io/collector/consumer"
 	"go.opentelemetry.io/collector/pdata/pcommon"
 	"go.opentelemetry.io/collector/pdata/pmetric"
+	"go.opentelemetry.io/collector/pipeline"
 	"go.uber.org/zap"
 )
 
@@ -33,52 +32,23 @@ type pingResult struct {
 	StatsTimestamp time.Time
 }
 
-type icmpCheckReceiver struct {
-	logger   *zap.Logger
-	config   *Config
-	consumer consumer.Metrics
-	cancel   context.CancelFunc
+type scraper struct {
+	logger  *zap.Logger
+	targets []Target
 }
 
-func newIcmpCheckReceiver(logger *zap.Logger, config *Config, consumer consumer.Metrics) *icmpCheckReceiver {
-	return &icmpCheckReceiver{
-		logger:   logger,
-		config:   config,
-		consumer: consumer,
-	}
+func newScraper(logger *zap.Logger, targets []Target) (*scraper, error) {
+	return &scraper{
+		logger:  logger,
+		targets: targets,
+	}, nil
 }
 
-func (r *icmpCheckReceiver) Start(ctx context.Context, host component.Host) error {
-	ctx, cancel := context.WithCancel(ctx)
-	r.cancel = cancel
-
-	go r.run(ctx)
-
-	return nil
+func (s *scraper) ID() pipeline.Signal {
+	return pipeline.SignalMetrics
 }
 
-func (r *icmpCheckReceiver) Shutdown(ctx context.Context) error {
-	if r.cancel != nil {
-		r.cancel()
-	}
-	return nil
-}
-
-func (r *icmpCheckReceiver) run(ctx context.Context) {
-	ticker := time.NewTicker(r.config.Interval)
-	defer ticker.Stop()
-
-	for {
-		select {
-		case <-ticker.C:
-			r.scrape(ctx)
-		case <-ctx.Done():
-			return
-		}
-	}
-}
-
-func (r *icmpCheckReceiver) scrape(ctx context.Context) {
+func (s *scraper) Scrape(ctx context.Context) (pmetric.Metrics, error) {
 	metrics := pmetric.NewMetrics()
 	scopeMetrics := metrics.ResourceMetrics().AppendEmpty().ScopeMetrics().AppendEmpty().Metrics()
 
@@ -111,17 +81,17 @@ func (r *icmpCheckReceiver) scrape(ctx context.Context) {
 	lossRatioMetric.SetName("ping.loss.ratio")
 	lossRatioMetricDataPoints := lossRatioMetric.SetEmptyGauge().DataPoints()
 
-	for _, target := range r.config.Targets {
+	for _, target := range s.targets {
 		pingRes, err := ping(target)
 		if err != nil {
 			var dnsErr *net.DNSError
 
 			if errors.As(err, &dnsErr) {
-				r.logger.Warn("skipping target", zap.Error(dnsErr))
+				s.logger.Log(zap.WarnLevel, "skipping target", zap.Error(dnsErr))
+
 				continue
 			} else {
-				r.logger.Error("failed to execute pinger", zap.String("target", target.Target), zap.Error(err))
-				continue
+				return pmetric.NewMetrics(), fmt.Errorf("failed to execute pinger for target %q: %w", target.Target, err)
 			}
 		}
 
@@ -136,7 +106,7 @@ func (r *icmpCheckReceiver) scrape(ctx context.Context) {
 		appendStatsDataPoint(stddevRttMetricDataPoints, float64(pingRes.Stats.StdDevRtt)/1e6, pingRes)
 	}
 
-	r.consumer.ConsumeMetrics(ctx, metrics)
+	return metrics, nil
 }
 
 func appendPacketDataPoint(metricDataPoints pmetric.NumberDataPointSlice, value float64, pkt *packet, stats *probing.Statistics) {
