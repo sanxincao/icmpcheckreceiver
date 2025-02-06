@@ -7,7 +7,6 @@ import (
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/consumer"
 	"go.opentelemetry.io/collector/receiver"
-	"go.opentelemetry.io/collector/receiver/receiverhelper"
 )
 
 var (
@@ -24,13 +23,13 @@ func createDefaultConfig() component.Config {
 	}
 }
 
-func createMetricsReceiver(_ context.Context, params receiver.Settings, baseCfg component.Config, consumer consumer.Metrics) (receiver.Metrics, error) {
+func createMetricsReceiver(_ context.Context, params receiver.CreateSettings, baseCfg component.Config, consumer consumer.Metrics) (receiver.Metrics, error) {
 	logger := params.Logger
 	cfg := baseCfg.(*Config)
 
 	icmpRcvr := newIcmpCheckReceiver(logger, cfg, consumer)
 
-	return receiverhelper.NewReceiver(&cfg.ReceiverSettings, params, consumer, receiverhelper.AddScraper(icmpRcvr))
+	return icmpRcvr, nil
 }
 
 // NewFactory creates a factory for icmpcheckreceiver.

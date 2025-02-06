@@ -2,13 +2,11 @@ package icmpcheckreceiver
 
 import (
 	"time"
-
-	"go.opentelemetry.io/collector/receiver/receiverhelper"
 )
 
 type Config struct {
-	receiverhelper.ControllerConfig `mapstructure:",squash"`
-	Targets                         []Target `mapstructure:"targets"`
+	Interval time.Duration `mapstructure:"interval"`
+	Targets  []Target      `mapstructure:"targets"`
 }
 
 type Target struct {
