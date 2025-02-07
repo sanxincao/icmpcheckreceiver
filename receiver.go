@@ -81,6 +81,10 @@ func (s *scraper) Scrape(ctx context.Context) (pmetric.Metrics, error) {
 	lossRatioMetric.SetName("ping.loss.ratio")
 	lossRatioMetricDataPoints := lossRatioMetric.SetEmptyGauge().DataPoints()
 
+	pingResultMetric := scopeMetrics.AppendEmpty()
+	pingResultMetric.SetName("ping.result")
+	pingResultDataPoints := pingResultMetric.SetEmptyGauge().DataPoints()
+
 	for _, target := range s.targets {
 		pingRes, err := ping(target)
 		if err != nil {
@@ -88,12 +92,15 @@ func (s *scraper) Scrape(ctx context.Context) (pmetric.Metrics, error) {
 
 			if errors.As(err, &dnsErr) {
 				s.logger.Log(zap.WarnLevel, "skipping target", zap.Error(dnsErr))
-
+				appendStatsDataPoint(pingResultDataPoints, 1, pingRes) // 设置失败的 ping.result 值
 				continue
 			} else {
+				appendStatsDataPoint(pingResultDataPoints, 1, pingRes) // 设置失败的 ping.result 值
 				return pmetric.NewMetrics(), fmt.Errorf("failed to execute pinger for target %q: %w", target.Target, err)
 			}
 		}
+
+		appendStatsDataPoint(pingResultDataPoints, 0, pingRes) // 设置成功的 ping.result 值
 
 		for _, pkt := range pingRes.Packets {
 			appendPacketDataPoint(rttMetricDataPoints, float64(pkt.Rtt.Nanoseconds())/1e6, pkt, pingRes.Stats)
