@@ -92,15 +92,15 @@ func (s *scraper) Scrape(ctx context.Context) (pmetric.Metrics, error) {
 
 			if errors.As(err, &dnsErr) {
 				s.logger.Log(zap.WarnLevel, "skipping target", zap.Error(dnsErr))
-				appendStatsDataPoint(pingResultDataPoints, 1, pingRes) // 设置失败的 ping.result 值
+				appendPingResultDataPoint(pingResultDataPoints, 1, target.Target) // 设置失败的 ping.result 值
 				continue
 			} else {
-				appendStatsDataPoint(pingResultDataPoints, 1, pingRes) // 设置失败的 ping.result 值
+				appendPingResultDataPoint(pingResultDataPoints, 1, target.Target) // 设置失败的 ping.result 值
 				return pmetric.NewMetrics(), fmt.Errorf("failed to execute pinger for target %q: %w", target.Target, err)
 			}
 		}
 
-		appendStatsDataPoint(pingResultDataPoints, 0, pingRes) // 设置成功的 ping.result 值
+		appendPingResultDataPoint(pingResultDataPoints, 0, target.Target) // 设置成功的 ping.result 值
 
 		for _, pkt := range pingRes.Packets {
 			appendPacketDataPoint(rttMetricDataPoints, float64(pkt.Rtt.Nanoseconds())/1e6, pkt, pingRes.Stats)
@@ -130,6 +130,13 @@ func appendStatsDataPoint(metricDataPoints pmetric.NumberDataPointSlice, value f
 	dp.SetTimestamp(pcommon.NewTimestampFromTime(pingRes.StatsTimestamp))
 	dp.Attributes().PutStr(ATTR_PEER_IP, pingRes.Stats.IPAddr.IP.String())
 	dp.Attributes().PutStr(ATTR_PEER_NAME, pingRes.Stats.Addr)
+}
+
+func appendPingResultDataPoint(metricDataPoints pmetric.NumberDataPointSlice, value float64, target string) {
+	dp := metricDataPoints.AppendEmpty()
+	dp.SetDoubleValue(value)
+	dp.SetTimestamp(pcommon.NewTimestampFromTime(time.Now()))
+	dp.Attributes().PutStr(ATTR_PEER_NAME, target)
 }
 
 func ping(target Target) (*pingResult, error) {
