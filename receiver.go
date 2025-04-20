@@ -150,6 +150,19 @@ func ping(target Target) (*pingResult, error) {
 		return &pingResult{}, fmt.Errorf("failed to create pinger: %w", err)
 	}
 
+	// 检测目标地址是否为 IPv6
+	ip := net.ParseIP(target.Target)
+	if ip == nil {
+		return &pingResult{}, fmt.Errorf("invalid IP address: %s", target.Target)
+	}
+	if ip.To4() == nil {
+		// 如果不是 IPv4，则设置为 IPv6
+		pinger.SetNetwork("ip6")
+	} else {
+		// 默认使用 IPv4
+		pinger.SetNetwork("ip4")
+	}
+
 	res := &pingResult{}
 
 	pinger.OnRecv = func(pkt *probing.Packet) {
