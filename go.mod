@@ -1,6 +1,6 @@
 module github.com/sanxincao/icmpcheckreceiver
 
-go 1.23.0
+go 1.22.0
 
 require (
 	github.com/prometheus-community/pro-bing v0.4.1
