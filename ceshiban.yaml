@@ -1,0 +1,1000 @@
+receivers:
+  icmpcheck/sw636:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.139
+  icmpcheck/sw642:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.140
+  icmpcheck/sw647:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.142
+  icmpcheck/sw650:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.143
+  icmpcheck/sw653:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.144
+  icmpcheck/sw656:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.145
+  icmpcheck/sw657:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.146
+  icmpcheck/sw667:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.148
+  icmpcheck/sw669:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.149
+  icmpcheck/sw672:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.150
+  icmpcheck/sw675:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.152
+  icmpcheck/sw678:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.153
+  icmpcheck/sw681:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.154
+  icmpcheck/sw684:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.155
+  icmpcheck/sw687:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.156
+  icmpcheck/sw732:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.157
+  icmpcheck/sw734:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.158
+  icmpcheck/sw775:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.159
+  icmpcheck/sw779:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.160
+  icmpcheck/sw737:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.161
+  icmpcheck/sw782:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.162
+  icmpcheck/sw740:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.163
+  icmpcheck/sw750:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.164
+  icmpcheck/sw751:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.165
+  icmpcheck/sw753:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.166
+  icmpcheck/sw758:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.168
+  icmpcheck/sw761:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.169
+  icmpcheck/sw764:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.170
+  icmpcheck/sw766:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.171
+  icmpcheck/sw769:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.172
+  icmpcheck/sw772:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.173
+  icmpcheck/sw785:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.174
+  icmpcheck/sw788:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.175
+  icmpcheck/sw791:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.1.176
+  icmpcheck/sw756:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.3.30
+  icmpcheck/sw691:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.115
+  icmpcheck/sw694:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.116
+  icmpcheck/sw698:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.117
+  icmpcheck/sw705:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.119
+  icmpcheck/sw708:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.120
+  icmpcheck/sw713:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.121
+  icmpcheck/sw702:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.123
+  icmpcheck/sw716:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.124
+  icmpcheck/sw717:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.125
+  icmpcheck/sw721:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.126
+  icmpcheck/sw169:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.43
+  icmpcheck/sw170:
+    collection_interval: 10s
+    targets:
+      - target:  10.9.4.44
+processors:
+  attributes/sw636:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.139   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 636  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93322枪-139 仙岛南-南京 西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw642:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.140   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 642  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93323枪-140 仙岛南-南京 东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw647:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.142   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 647  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93325枪-142 仙岛南-南京 南向北"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw650:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.143   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 650  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93326枪-143 仙岛南-南京 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw653:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.144   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 653  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93327球-144 仙岛南-南京街路口"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw656:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.145   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 656  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93328枪-145 仙岛南-南京 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw657:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.146   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 657  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93329枪-146 长白二-兴岛 南向北"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw667:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.148   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 667  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93331枪-148 长白二-兴岛 西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw669:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.149   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 669  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93332枪-149 长白二-兴岛 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw672:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.150   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 672  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93333球-150 长白二-兴岛 路口"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw675:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.152   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 675  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93335枪-152 长白二-仙岛南 东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw678:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.153   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 678  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93405枪-153 长白南-南京南 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw681:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.154   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 681  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93336枪-154 长白二-仙岛南 西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw684:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.155   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 684  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93337球-155 长白二-仙岛南 路口"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw687:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.156   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 687  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93406枪-156 长白南-南京南 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw732:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.157   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 732  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93338枪-157 长白二-仙岛南 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw734:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.158   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 734  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93339枪-158 长白三-兴岛 西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw775:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.159   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 775  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93340枪-159 长白三-兴岛 东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw779:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.160   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 779  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93341枪-160 长白三-兴岛 南向北"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw737:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.161   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 737  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93342枪-161 长白三-兴岛路 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw782:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.162   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 782  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93343球-162 长白三-兴岛 路口"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw740:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.163   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 740  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93344枪-163 仙岛南-宋雨桂 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw750:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.164   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 750  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93345枪-164 仙岛南-宋雨桂 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw751:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.165   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 751  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93346球-165 仙岛南-宋雨桂门前"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw753:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.166   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 753  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93347枪-166 执法局沈水湾街道 东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw758:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.168   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 758  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93349枪-168 执法局沈水湾街道 北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw761:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.169   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 761  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93350球-169 执法局沈水湾街道门前"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw764:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.170   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 764  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93351枪-170 东北气象中心 东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw766:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.171   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 766  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93352枪-171 东北气象中心 西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw769:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.172   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 769  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93353枪-172 东北区域气象中心北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw772:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.173   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 772  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93354球-173 东北区域气象中心"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw785:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.174   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 785  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93355枪-174 长白劳务市场院内"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw788:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.175   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 788  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93356枪-175 长白劳务市场西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw791:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.1.176   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 791  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93357枪-176 长白劳务市场北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw756:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.3.30   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 756  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93758枪-30 长白四-秀岛 南向北"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw691:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.115   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 691  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93023枪-115 曹仲开发区桥南 西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw694:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.116   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 694  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93165枪-116 沈苏西路族旺路路口西向东"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw698:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.117   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 698  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93196枪-117 民强街与族旺路口东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw705:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.119   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 705  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93780枪-119 仙岛一巷与长白南路北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw708:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.120   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 708  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93497枪-120 长白街172-20号1门南向北"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw713:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.121   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 713  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93514枪-121 长白街172-20号1门北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw702:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.123   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 702  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93334枪-123 满融路满融迎宾馆南向北"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw716:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.124   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 716  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93515枪-124 民致街开发区桥北北向南"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw717:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.125   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 717  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93519枪-125 下河湾蒙福超市南向北"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw721:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.126   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 721  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93520枪-126 沈苏路浑南西路南东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw169:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.43   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 169  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93517枪-43 胜利大街物产集团东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+  attributes/sw170:
+    actions:
+      - key: device_ip 
+        action: insert
+        value: 10.9.4.44   # 设备主IP
+      - key: device_id
+        action: insert
+        value: 170  # 设备ID
+      - key: device_name
+        action: insert
+        value: "93521枪-44 胜利街鑫诚汽车小道东向西"  # 设备名称
+      - key: device_site
+        action: insert
+        value: "和平-摄像机"     #站点 
+      - key: device_location
+        action: insert
+        value: "unknown"  # 设备位置
+exporters:
+  otlp:
+    endpoint: "http://10.9.5.0:4317"
+    tls:
+      insecure: true
+service:
+  pipelines:
+    metrics:
+      receivers: [icmpcheck/sw636, icmpcheck/sw642, icmpcheck/sw647, icmpcheck/sw650, icmpcheck/sw653, icmpcheck/sw656, icmpcheck/sw657, icmpcheck/sw667, icmpcheck/sw669, icmpcheck/sw672, icmpcheck/sw675, icmpcheck/sw678, icmpcheck/sw681, icmpcheck/sw684, icmpcheck/sw687, icmpcheck/sw732, icmpcheck/sw734, icmpcheck/sw775, icmpcheck/sw779, icmpcheck/sw737, icmpcheck/sw782, icmpcheck/sw740, icmpcheck/sw750, icmpcheck/sw751, icmpcheck/sw753, icmpcheck/sw758, icmpcheck/sw761, icmpcheck/sw764, icmpcheck/sw766, icmpcheck/sw769, icmpcheck/sw772, icmpcheck/sw785, icmpcheck/sw788, icmpcheck/sw791, icmpcheck/sw756, icmpcheck/sw691, icmpcheck/sw694, icmpcheck/sw698, icmpcheck/sw705, icmpcheck/sw708, icmpcheck/sw713, icmpcheck/sw702, icmpcheck/sw716, icmpcheck/sw717, icmpcheck/sw721, icmpcheck/sw169, icmpcheck/sw170]
+      processors: [attributes/sw636, attributes/sw642, attributes/sw647, attributes/sw650, attributes/sw653, attributes/sw656, attributes/sw657, attributes/sw667, attributes/sw669, attributes/sw672, attributes/sw675, attributes/sw678, attributes/sw681, attributes/sw684, attributes/sw687, attributes/sw732, attributes/sw734, attributes/sw775, attributes/sw779, attributes/sw737, attributes/sw782, attributes/sw740, attributes/sw750, attributes/sw751, attributes/sw753, attributes/sw758, attributes/sw761, attributes/sw764, attributes/sw766, attributes/sw769, attributes/sw772, attributes/sw785, attributes/sw788, attributes/sw791, attributes/sw756, attributes/sw691, attributes/sw694, attributes/sw698, attributes/sw705, attributes/sw708, attributes/sw713, attributes/sw702, attributes/sw716, attributes/sw717, attributes/sw721, attributes/sw169, attributes/sw170]
+      exporters: [otlp]
