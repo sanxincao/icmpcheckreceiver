@@ -2,7 +2,6 @@ package icmpcheckreceiver
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net"
 	"time"
@@ -88,16 +87,9 @@ func (s *scraper) Scrape(ctx context.Context) (pmetric.Metrics, error) {
 	for _, target := range s.targets {
 		pingRes, err := ping(target)
 		if err != nil {
-			var dnsErr *net.DNSError
-
-			if errors.As(err, &dnsErr) {
-				s.logger.Log(zap.WarnLevel, "skipping target", zap.Error(dnsErr))
-				appendPingResultDataPoint(pingResultDataPoints, 0, target.Target) // 设置失败的 ping.result 值
-				continue
-			} else {
-				appendPingResultDataPoint(pingResultDataPoints, 0, target.Target) // 设置失败的 ping.result 值
-				return pmetric.NewMetrics(), fmt.Errorf("failed to execute pinger for target %q: %w", target.Target, err)
-			}
+			s.logger.Log(zap.WarnLevel, "skipping target", zap.Error(err))
+			appendPingResultDataPoint(pingResultDataPoints, 0, target.Target) // 设置失败的 ping.result 值
+			continue
 		}
 
 		// 根据丢包率设置 ping.result 值
