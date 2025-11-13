@@ -86,12 +86,16 @@ func (s *scraper) Scrape(ctx context.Context) (pmetric.Metrics, error) {
 
 	for _, target := range s.targets {
 		pingRes, err := ping(target)
-
+		if err != nil {
+			// 如果 ping 失败，设置 ping.result 为 0
+			appendPingResultDataPoint(pingResultDataPoints, 0.0, target.Target)
+			continue
+		}
 		// 根据丢包率设置 ping.result 值
 		if pingRes.Stats.PacketLoss < 50 {
-			appendPingResultDataPoint(pingResultDataPoints, 1, target.Target) // 设置成功的 ping.result 值
+			appendPingResultDataPoint(pingResultDataPoints, 1.0, target.Target) // 设置成功的 ping.result 值
 		} else {
-			appendPingResultDataPoint(pingResultDataPoints, 1, target.Target) // 设置失败的 ping.result 值
+			appendPingResultDataPoint(pingResultDataPoints, 0.0, target.Target) // 设置失败的 ping.result 值
 		}
 
 		for _, pkt := range pingRes.Packets {
