@@ -86,11 +86,6 @@ func (s *scraper) Scrape(ctx context.Context) (pmetric.Metrics, error) {
 
 	for _, target := range s.targets {
 		pingRes, err := ping(target)
-		if err != nil {
-			s.logger.Log(zap.WarnLevel, "skipping target", zap.Error(err))
-			appendPingResultDataPoint(pingResultDataPoints, 0, target.Target) // 设置失败的 ping.result 值
-			continue
-		}
 
 		// 根据丢包率设置 ping.result 值
 		if pingRes.Stats.PacketLoss < 50 {
